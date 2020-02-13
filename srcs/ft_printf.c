@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:56:23 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 18:20:30 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 18:49:52 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,15 @@ int		ft_printf(const char *string, ...)
 	{
 		if ((count = count_chars(&string[i])) == -1)
 		{
-			line_l_realloc(&string[i], ft_strlen(&string[i]), &line);
+			if ((line_l_realloc(&string[i], ft_strlen(&string[i]), &line)) == -1)
+			{
+				if (line)
+				{
+					free(line);
+					line = NULL;
+				}
+				return (-1);
+			}
 			ft_putstr(line);
 			free(line);
 			line = NULL;
@@ -73,7 +81,15 @@ int		ft_printf(const char *string, ...)
 		}
 		else if (count > 0)
 		{
-			line_l_realloc(&string[i], count, &line);
+			if ((line_l_realloc(&string[i], count, &line)) == -1)
+			{
+				if (line)
+				{
+					free(line);
+					line = NULL;
+				}
+				return (-1);
+			}
 			i += count;
 		}
 		else
@@ -81,11 +97,18 @@ int		ft_printf(const char *string, ...)
 			i++;
 			if (check_format(&string[i], params, &formats) == -1)
 			{
-				if ()
 				va_end(params);
 				return (-1);
 			}
-			line_l_realloc(conv, ft_strlen(conv), &line);
+			if ((line_l_realloc(conv, ft_strlen(conv), &line)) == -1)
+			{
+				if (line)
+				{
+					free(line);
+					line = NULL;
+				}
+				return (-1);
+			}
 			free(conv);
 			conv == NULL;
 		}
