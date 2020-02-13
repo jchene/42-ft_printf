@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:27:20 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 12:25:27 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 18:30:58 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ int		is_charset(char c, char *charset)
 		i++;
 	}
 	return (-1);
+}
+
+void	ft_strcpy(char *dst, char *src)
+{
+	int		i;
+
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
 }
 
 int		ft_strlen(char *string)

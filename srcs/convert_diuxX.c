@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_diu.c                                      :+:      :+:    :+:   */
+/*   convert_diuxX.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:19:21 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 17:18:07 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 18:31:58 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,28 @@ int		convert_uint(unsigned int nb, t_format *formats)
 		nb /= 10;
 		i++;
 	}
+	formats->conv[len] = '\0';
+	return (0);
+}
+
+int		convert_hexa(unsigned int nb, t_format *formats, char *base)
+{
+	int		i;
+	int		len;
+	char	buff[9];
+
+	buff[8] = '\0';
+	i = 7;
+	while (nb != 0 && i >= 0)
+	{
+		buff[i] = base[nb % 16];
+		nb /= 16;
+		i--;
+	}
+	len = ft_strlen(&buff[i + 1]);
+	if (!(formats->conv = (char *)malloc(sizeof(char) * len + 1)))
+		return (-1);
+	ft_strcpy(formats->conv, &buff[i + 1]);
 	formats->conv[len] = '\0';
 	return (0);
 }

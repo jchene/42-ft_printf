@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:56:23 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 17:20:43 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 18:20:30 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		ft_printf(const char *string, ...)
 		else
 		{
 			i++;
-			if (check_format(&string[i], params, &formats) < 0)
+			if (check_format(&string[i], params, &formats) == -1)
 			{
 				if ()
 				va_end(params);
