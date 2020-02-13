@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:51:20 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 12:36:21 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 16:17:33 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 int		main()
 {
-	char *p;
-	char c;
+	char	*p;
+	char	c;
+	int		i;
 
 	c = 'I';
 	p = &c;
-	
-	
-	printf("p: %kkk\n", c);
+	if (!i)
+	{
+		printf("ko1\n");
+		i = 0;
+	}
+	if (!i)
+	{
+		printf("ko2\n");
+		i = 1;
+	}
+	if (!i)
+		printf("ko3\n");
+
 	return (0);
 }

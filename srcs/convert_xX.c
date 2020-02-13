@@ -6,9 +6,10 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 12:31:51 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 12:32:11 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 17:20:53 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib.h"
 #include "../headers/ext_libs.h"
+#include "../headers/printf.h"

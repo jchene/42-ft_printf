@@ -6,13 +6,13 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:56:23 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 14:46:05 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/13 17:20:43 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib.h"
 #include "../headers/ext_libs.h"
-#include "../headers/handle_format.h"
+#include "../headers/printf.h"
 
 int		count_chars(const char *string)
 {
@@ -79,10 +79,10 @@ int		ft_printf(const char *string, ...)
 		else
 		{
 			i++;
-			
-			if (handle_format(&string[i], params, &formats) == -1)
+			if (check_format(&string[i], params, &formats) < 0)
 			{
-				free_all(&line, &params, &formats);
+				if ()
+				va_end(params);
 				return (-1);
 			}
 			line_l_realloc(conv, ft_strlen(conv), &line);
