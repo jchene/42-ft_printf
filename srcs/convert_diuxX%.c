@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:19:21 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 18:31:58 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/14 17:20:20 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		convert_int(int nb, t_format *formats)
 		i++;
 	}
 	formats->conv[len] = '\0';
+	formats->type = 'i';
 	return (0);
 }
 
@@ -54,17 +55,19 @@ int		convert_uint(unsigned int nb, t_format *formats)
 		i++;
 	}
 	formats->conv[len] = '\0';
+	formats->type = 'u';
 	return (0);
 }
 
-int		convert_hexa(unsigned int nb, t_format *formats, char *base)
+int		convert_hexa(unsigned long nb, t_format *formats, char *base)
 {
 	int		i;
 	int		len;
-	char	buff[9];
+	char	buff[ul_len(nb) + 1];
 
-	buff[8] = '\0';
-	i = 7;
+	len = ul_len(nb);
+	buff[len] = '\0';
+	i = len - 1;
 	while (nb != 0 && i >= 0)
 	{
 		buff[i] = base[nb % 16];
@@ -76,5 +79,16 @@ int		convert_hexa(unsigned int nb, t_format *formats, char *base)
 		return (-1);
 	ft_strcpy(formats->conv, &buff[i + 1]);
 	formats->conv[len] = '\0';
+	formats->type = 'x';
+	return (0);
+}
+
+int		convert_percent(t_format *formats)
+{
+	if (!(formats->conv = (char *)malloc(sizeof(char) * 2)))
+		return (-1);
+	formats->conv[0] = '%';
+	formats->conv[1] = '\0';
+	formats->type = '%';
 	return (0);
 }

@@ -44,5 +44,33 @@ int		uint_len(unsigned int nb)
 		nb_len++;
 	}
 	return (nb_len);
+}
 
+
+int		ul_len(unsigned long nb)
+{
+	int nb_len;
+
+	nb_len = 1;
+	while (nb > 10)
+	{
+		nb /= 10;
+		nb_len++;
+	}
+	return (nb_len);
+}
+
+int		ft_atoi(char *str)
+{
+	int		i;
+	int		nbr;
+
+	i = 0;
+	nbr = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr = (nbr * 10) + (str[i] - '0');
+		i++;
+	}
+	return (nbr);
 }

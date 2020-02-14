@@ -17,8 +17,11 @@ typedef struct	s_format
 {
 	int			flags;
 	int			width;
+	int			width_param;
 	int			precision;
+	int			precision_param;
 	char		*conv;
+	char		type;
 }				t_format;
 
 int				check_flags(char *str, va_list params, t_format *formats);
@@ -26,13 +29,13 @@ int				check_width(char *str, va_list params, t_format *formats);
 int				check_precision(char *str, va_list params, t_format *formats);
 int				check_type(char *str, va_list params, t_format *formats);
 int				check_format(char *str, va_list params, t_format *formats);
-int				handle_flags();
-int				handle_width();
-int				handle_precision();
+int				handle_flags(char *str, t_format *formats);
+int				handle_width(char *str, t_format *formats);
+int				handle_precision(char *str, t_format *formats);
 int				handle_type(char *str, va_list params, t_format *formats);
 int				convert_char(char c, t_format *formats);
 int				convert_string(char *str, t_format *formats);
-int				convert_pointer(unsigned int ptr, t_format *formats);
+int				convert_pointer(void *p, t_format *formats);
 int				convert_int(int nb, t_format *formats);
 int				convert_uint(unsigned int nb, t_format *formats);
 int				convert_hexa(unsigned int nb, t_format *formats, char *base);
