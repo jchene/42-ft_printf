@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:56:01 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 11:57:12 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:22:43 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <stdio.h>
 #endif

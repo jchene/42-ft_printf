@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:50:34 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/14 17:20:42 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:36:42 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,60 @@ int		handle_precision(char *string, t_format *formats)
 	int		ret_value;
 
 	i = 0;
+	//printf("handling precision \n");
+	//printf("actual string: -%s-\n", &string[i]);
 	if (formats->precision_param != -1)
 		precision = formats->precision_param;
 	else
 	{
 		while (string[i] == '0' || string[i] == '-' || string[i] == '+')
 			i++;
+		//printf("atoi-ing: -%s-\n", &string[i]);
 		precision = ft_atoi(&string[i]);
 	}
+	//printf("precision: %d\n", precision);
 	if (formats->type == 'c' || formats->type == '%')
 		return (0);
 	else if (formats->type == 's')
 		ret_value = apply_prec_str(precision, formats);
 	else 
-		ret_value = apply_prec_misc(precision, formats);
+		ret_value = apply_prec_nbr(precision, formats);
 	if (ret_value == -1)
 		return (-1);
 	return (0);
 }
 
-int		handle_width(char *str, t_format *formats);
+int		handle_width(char *string, t_format *formats)
+{
+	int		i;
+	int		width;
 
-int		handle_flags(char *str, t_format *formats);
+	i = 0;
+	if (formats->width_param != -1)
+		width = formats->width_param;
+	else
+	{
+		while (string[i] == '0')
+			i++;
+		//printf("atoi-ing %s\n", &string[i]);
+		width = ft_atoi(&string[i]);
+	}
+	if ((apply_width(width, formats)) == -1)
+		return (-1);
+	return (0);
+}
+
+int		handle_flags(char *string, t_format *formats)
+{
+	int		ret_value;
+
+	if (formats->flags > 1 || string[0] == '-')
+		ret_value = apply_flag_minus(formats);
+	else if (string[0] == '0' && formats->precision == 0)
+		ret_value = apply_flag_zero(formats);
+	else
+		ret_value = 0;
+	if (ret_value == -1)
+		return (-1);
+	return (0);
+}

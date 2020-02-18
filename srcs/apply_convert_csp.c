@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_csp.c                                      :+:      :+:    :+:   */
+/*   apply_convert_csp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ int		convert_char(char c, t_format *formats)
 	return (0);
 }
 
-int		convert_strings(char *str, t_format *formats)
+int		convert_string(char *str, t_format *formats)
 {
 	int		len;
 	

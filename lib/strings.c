@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:27:20 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/13 18:30:58 by jchene           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:35:27 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ void  ft_strncat(char *dst, char *src, int n)
 		dst[i] = src[j];
 		i++;
 		j++;
+	}
+}
+
+void	ft_strlcpy(char *dst, char *src, int nb)
+{
+	int		i;
+
+	i = 0;
+	while (src[i] && i < nb)
+	{
+		dst[i] = src[i];
+		i++;
 	}
 }
 
