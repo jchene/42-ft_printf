@@ -10,17 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/lib.h"
-#include "../headers/ext_libs.h"
 #include "../headers/printf.h"
 
 int		convert_char(char c, t_format *formats)
 {
+	//printf("converting char: |%c|\n", c);
 	if (!(formats->conv = (char *)malloc(sizeof(char) * 2)))
 		return (-1);
 	formats->conv[0] = c;
 	formats->conv[1] = '\0';
 	formats->type = 'c';
+	formats->true_len = 1;
+	//if (c == '\0')
+		//printf("invisible char\n");
+	//printf("converted: |%c|\n", formats->conv[0]);
 	return (0);
 }
 
@@ -34,6 +37,7 @@ int		convert_string(char *str, t_format *formats)
 	ft_strcpy(formats->conv, str);
 	formats->conv[len] = '\0';
 	formats->type = 's';
+	formats->true_len = ft_strlen(formats->conv);
 	return (0);
 }
 
@@ -48,10 +52,11 @@ int		convert_pointer(void *p, t_format *formats)
 	if (!(buff = (char *)malloc(sizeof(char) * 15)))
 		return(-1);
 	ft_strcpy(buff, "0x");
-	ft_strncat(buff, formats->conv, ft_strlen(formats->conv));
+	ft_strncat(buff, formats->conv, ft_strlen(formats->conv), ft_strlen(buff));
 	buff[14] = '\0';
 	free(formats->conv);
 	formats->conv = buff;
 	formats->type = 'p';
+	formats->true_len += ft_strlen(formats->conv);
 	return (0);
 }

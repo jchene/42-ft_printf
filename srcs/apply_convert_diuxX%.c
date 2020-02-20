@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/lib.h"
-#include "../headers/ext_libs.h"
 #include "../headers/printf.h"
 
 int		convert_int(int nb, t_format *formats)
@@ -19,7 +17,9 @@ int		convert_int(int nb, t_format *formats)
 	int		i;
 	int		len;
 
+	////printf("type = d/i\n");
 	len = int_len(nb);
+	////printf("converting %d\nwith len: %d\n", nb, len);
 	if (!(formats->conv = (char *)malloc(sizeof(char) * len + 1)))
 		return (-1);
 	if (nb < 0)
@@ -36,6 +36,8 @@ int		convert_int(int nb, t_format *formats)
 	}
 	formats->conv[len] = '\0';
 	formats->type = 'i';
+	formats->true_len = ft_strlen(formats->conv);
+	////printf("converted: !%s!\n", formats->conv);
 	return (0);
 }
 
@@ -56,6 +58,7 @@ int		convert_uint(unsigned int nb, t_format *formats)
 	}
 	formats->conv[len] = '\0';
 	formats->type = 'u';
+	formats->true_len = ft_strlen(formats->conv);
 	return (0);
 }
 
@@ -80,6 +83,7 @@ int		convert_hexa(unsigned long nb, t_format *formats, char *base)
 	ft_strcpy(formats->conv, &buff[i + 1]);
 	formats->conv[len] = '\0';
 	formats->type = 'x';
+	formats->true_len = ft_strlen(formats->conv);
 	return (0);
 }
 
@@ -90,5 +94,6 @@ int		convert_percent(t_format *formats)
 	formats->conv[0] = '%';
 	formats->conv[1] = '\0';
 	formats->type = '%';
+	formats->true_len = ft_strlen(formats->conv);
 	return (0);
 }
