@@ -12,6 +12,9 @@
 
 #ifndef PRINTF_H
 # define PRINTF_H
+# include "lib.h"
+# include "ext_libs.h"
+# include "test.h"
 
 typedef struct		s_format
 {
@@ -21,6 +24,8 @@ typedef struct		s_format
 	int				width_param;
 	int				precision;
 	int				precision_param;
+	int				true_len;
+	int				ret_len;
 	char			*conv;
 	char			type;
 }					t_format;
@@ -46,5 +51,9 @@ int					apply_prec_nbr(int precision, t_format *formats);
 int					apply_width(int width, t_format *formats);
 int					apply_flag_minus(t_format *formats);
 int					apply_flag_zero(t_format *formats);
+int					count_chars(const char *string);
+int					line_l_realloc(char *str, int n, char **line, t_format *formats);
 int					sum_formats(t_format *formats);
+int					ft_printf(const char *string, ...);
+
 #endif

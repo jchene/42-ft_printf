@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/lib.h"
-#include "../headers/ext_libs.h"
 #include "../headers/printf.h"
 
 int		int_len(int nb)
@@ -19,6 +17,7 @@ int		int_len(int nb)
 	int nb_len;
 	int	minus;
 
+	//printf("testing len of %d\n", nb);
 	minus = 0;
 	if (nb < 0)
 	{
@@ -26,7 +25,7 @@ int		int_len(int nb)
 		minus++;
 	}
 	nb_len = 1;
-	while (nb > 10)
+	while (nb >= 10)
 	{
 		nb /= 10;
 		nb_len++;
@@ -84,8 +83,6 @@ int		sum_formats(t_format *formats)
 	ret += formats->flags;
 	ret += formats->width;
 	ret += formats->precision;
-	if (ret += formats->precision)
-		ret++;
 	if (formats->type)
 	{
 		if (formats->type == '%')
@@ -94,5 +91,6 @@ int		sum_formats(t_format *formats)
 			formats->type = '.';
 		}
 	}
+	ret++;
 	return (ret);
 }

@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/lib.h"
-#include "../headers/ext_libs.h"
 #include "../headers/printf.h"
 
 int		count_chars(const char *string)
@@ -26,78 +24,67 @@ int		count_chars(const char *string)
 	return (-1);
 }
 
-int		line_l_realloc(char *str, int n, char **line)
+int		line_l_realloc(char *str, int n, char **line, t_format *formats)
 {
-	char	*buff;
-	int		len;
+	char			*buff;
 
-	//printf("new realloc:\nstr: -%s-\nn: -%d-\n", str, n);
+	//printf("new realloc:\n	str: %s	n: %d\n	line_len: %d\n", str, n, formats->ret_len);
 	if (!*line)
 	{
-		//printf("creating line\n");
-		if (!(*line = (char *)malloc(sizeof(char) * (n + 1))))
+		//printf("	creating line of %d chars\n", n + 1);
+		if (!(*line = (char *)ft_calloc(n + 1 , sizeof(char))))
 			return (-1);
 		ft_strlcpy(*line, str, n);
 		(*line)[n] = '\0';
-		//printf("new line: -%s-\n", *line);
+		formats->ret_len = n;
+		//printf("	line_len: %d\n", formats->ret_len);
+		//printf("	new line: %s\n", *line);
 		return (0);
 	}
-	len = n + ft_strlen(*line);
-	//printf("realloc-ing -%d- len\n", len);
-	if (!(buff = (char *)malloc(sizeof(char) * (len + 1))))
+	//printf("	realloc-ing %d len\n", n + formats->ret_len);
+	if (!(buff = (char *)ft_calloc((n + formats->ret_len + 1), sizeof(char))))
 		return (-1);
-	ft_strcpy(buff, *line);
-	buff[ft_strlen(*line)] = '\0';
-	//printf("buff: -%s-\n", buff);
-	ft_strncat(buff, str, n);
-	buff[len] = '\0';
+	ft_strlcpy(buff, *line, formats->ret_len);
+	buff[formats->ret_len] = '\0';
+	ft_strncat(buff, str, n, formats->ret_len);
+	buff[n + formats->ret_len] = '\0';
 	free(*line);
 	*line = buff;
-	//printf("new line: -%s-\n", *line);
+	formats->ret_len += n;
+	//printf("	line_len: %d\n", formats->ret_len);
+	//putprint("new line: |", 11);
+	//putprint(*line, formats->ret_len);
+	//putprint("|\n", 2);
 	return (0);
 }
 
 int		ft_printf(const char *string, ...)
 {
 	int			i;
-	int			len;
 	int			count;
+	int			ret_len;
 	char		*line;
 	va_list		params;
 	t_format	*formats;
 
-	i = 0;
-	count = 0;
-	if (!(formats = (t_format *)malloc(sizeof(t_format))))
-		return (-1);
+	
 	if (!(ft_strlen((char *)string)))
 		return (0);
+	if (!(formats = (t_format *)ft_calloc(1, sizeof(t_format))))
+		return (-1);
+	i = 0;
+	count = 0;
+	line = NULL;
+	formats->true_len = 0;
+	formats->ret_len = 0;
 	va_start(params, string);
 	while (string[i])
 	{
-		if ((count = count_chars(&string[i])) == -1)
+		if ((count = count_chars(&string[i])) > 0)
 		{
-			//printf("\nno %% found\n");
-			if ((line_l_realloc((char *)&string[i], ft_strlen((char *)&string[i]), &line)) == -1)
-			{
-				if (line)
-				{
-					free(line);
-					line = NULL;
-				}
-				return (-1);
-			}
-			ft_putstr(line);
-			len = ft_strlen(line);
-			free(line);
-			line = NULL;
-			return (len);
-		}
-		else if (count > 0)
-		{
-			//printf("\nfound %% after -%d- chars\n", count);
-			//printf("-%s-\n", (char *)&string[i]);
-			if ((line_l_realloc((char *)&string[i], count, &line)) == -1)
+			//printf("\nfound %% after %d chars, i = %d\n", count, i);
+			////printf("%s\n", (char *)&string[i]);
+			if ((line_l_realloc((char *)&string[i], count, &line, formats)) == -1)
 			{
 				if (line)
 				{
@@ -107,17 +94,20 @@ int		ft_printf(const char *string, ...)
 				return (-1);
 			}
 			i += count;
+			formats->true_len += count;
+			//printf("jumped to %%\n");
 		}
-		else
+		else if (count == 0)
 		{
-			//printf("\nfound %%\n");
+			//printf("\nfound %%, i = %d\n", i);
 			i++;
 			if (check_format((char *)&string[i], params, formats) == -1)
 			{
 				va_end(params);
+				ft_puterror((char *)string);
 				return (-1);
 			}
-			if ((line_l_realloc(formats->conv, ft_strlen(formats->conv), &line)) == -1)
+			if ((line_l_realloc(formats->conv, formats->true_len, &line, formats)) == -1)
 			{
 				if (line)
 				{
@@ -126,14 +116,32 @@ int		ft_printf(const char *string, ...)
 				}
 				return (-1);
 			}
-			//printf("conv: %s\n", formats->conv);
 			free(formats->conv);
 			formats->conv = NULL;
-			//printf("end cnv \n");
 			i += sum_formats(formats);
+			////printf("sum formats: %d\n", sum_formats(formats));
+		}
+		else
+		{
+			//printf("\nno %% found, i = %d\n", i);
+			if ((line_l_realloc((char *)&string[i], ft_strlen((char *)&string[i]), &line, formats)) == -1)
+			{
+				if (line)
+				{
+					free(line);
+					line = NULL;
+				}
+				return (-1);
+			}
+			formats->true_len += ft_strlen((char *)&string[i]);
+			ft_putstr(line, formats->ret_len);
+			ret_len = formats->ret_len;
+			free(line);
+			free(formats);
+			line = NULL;
+			formats = NULL;
+			return (ret_len);
 		}
 	}
-	if (line)
-		ft_putstr(line);
 	return (0);
 }

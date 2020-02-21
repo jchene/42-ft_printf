@@ -12,6 +12,7 @@ SRCS		=	srcs/ft_printf.c\
 				srcs/apply_flag.c\
 				lib/numbers.c\
 				lib/strings.c\
+				lib/mem_disp.c\
 
 CC			=	gcc
 

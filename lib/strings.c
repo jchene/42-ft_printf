@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/lib.h"
-#include "../headers/ext_libs.h"
+#include "../headers/printf.h"
 
 int		is_charset(char c, char *charset)
 {
@@ -37,26 +36,14 @@ int		ft_strlen(char *string)
 	return (i);
 }
 
-void	ft_putstr(char *string)
-{
-	int i;
-
-	i = 0;
-	while (string[i])
-	{
-		write (1, &string[i], 1);
-		i++;
-	}
-}
-
-void  ft_strncat(char *dst, char *src, int n)
+void  ft_strncat(char *dst, char *src, int n, int buff_len)
 {
 	int		i;
 	int		j;
 
-	i = ft_strlen(dst);
+	i = buff_len;
 	j = 0;
-	while (src[j] && j < n)
+	while (j < n)
 	{
 		dst[i] = src[j];
 		i++;
@@ -69,7 +56,7 @@ void	ft_strlcpy(char *dst, char *src, int nb)
 	int		i;
 
 	i = 0;
-	while (src[i] && i < nb)
+	while (i < nb)
 	{
 		dst[i] = src[i];
 		i++;
@@ -86,4 +73,13 @@ void	ft_strcpy(char *dst, char *src)
 		dst[i] = src[i];
 		i++;
 	}
+}
+
+void	putprint(char *str, int nb)
+{
+	int		i;
+
+	i = 0;
+	while (i < nb)
+		printf("%c", str[i++]);
 }
