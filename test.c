@@ -11,16 +11,20 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "headers/printf.h"
 
 int		ft_printf(const char *string, ...);
 
 int		main(void)
 {
-	const char	*test = "-->|%-4.c|<--\n";
+	char		*string;
+	const char	*test = "-->|%-4x|<--\n";
 	int			nb = -21;
+	int			*p;
 
+	string = "abc";
+	p = NULL;
 	ft_printf(test, 0);
 	printf(test, 0);
-
 	return (0);
 }

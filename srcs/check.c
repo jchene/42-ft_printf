@@ -24,7 +24,7 @@ int		check_flags(char *string, va_list params, t_format *formats)
 		formats->flags++;
 		i++;
 	}
-	//printf("flags found: %d\n", formats->flags);
+	printf("flags found: %d\n", formats->flags);
 	if ((check_width(&string[i], params, formats)) == -1)
 		return (-1);
 	if (formats->flags > 0 || formats->width_param < 0)
@@ -55,7 +55,7 @@ int		check_width(char *string, va_list params, t_format *formats)
 			i++;
 		}
 	}
-	//printf("width found: %d\n", formats->width);
+	printf("width found: %d\n", formats->width);
 	////printf("handling width on: %s\n", &string[i]);
 	if ((check_precision(&string[i], params, formats)) == -1)
 		return (-1);
@@ -72,7 +72,8 @@ int		check_precision(char *string, va_list params, t_format *formats)
 
 	i = 0;
 	formats->precision = 0;
-	formats->precision_param = -1;
+	formats->prec_in_param = 0;
+	formats->precision_param = 0;
 	////printf("checking precision on: %s\n", string);
 	if (string[i] == '.')
 	{
@@ -82,6 +83,7 @@ int		check_precision(char *string, va_list params, t_format *formats)
 		{
 			formats->precision++;
 			formats->precision_param = va_arg(params, int);
+			formats->prec_in_param = 1;
 			i++;
 		}
 		else
@@ -93,11 +95,11 @@ int		check_precision(char *string, va_list params, t_format *formats)
 			}
 		}
 	}
-	//printf("precision found: %d\n", formats->precision);
+	printf("precision found: %d\n", formats->precision);
 	if ((check_type(&string[i], params, formats)) == -1)
 		return(-1);
 	if (formats->precision > 0)
-		if ((handle_precision(&string[(i - (formats->precision))], formats)) == -1)
+		if ((handle_precision(&string[(i - (formats->precision) + 1)], formats)) == -1)
 			return (-1);
 	return (0);
 }

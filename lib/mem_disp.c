@@ -24,25 +24,6 @@ void	ft_putstr(char *string, int nb)
 	}
 }
 
-void	ft_puterror(char *str)
-{
-	int		i;
-
-	i = 0;
-	while(str[i] && str[i] != '.')
-		write(1, &str[i++], 1);
-	if (!(str[i]))
-		return;
-	write(1, ".", 1);
-	i++;
-	if (str[i] == '+' || str[i] == '-')
-		write(1, "0", 1);
-	else if (str[i] == '0')
-		while (str[i] == '0')
-			i++;
-	ft_putstr(&str[i], ft_strlen(&str[i]));
-}
-
 void	*ft_memset(void *s, int c, int n)
 {
 	unsigned char	chr;

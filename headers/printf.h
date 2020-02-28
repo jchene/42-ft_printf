@@ -23,7 +23,9 @@ typedef struct		s_format
 	int				width;
 	int				width_param;
 	int				precision;
+	int				prec_in_param;
 	int				precision_param;
+	int				jump;
 	int				true_len;
 	int				ret_len;
 	char			*conv;

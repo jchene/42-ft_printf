@@ -16,7 +16,6 @@
 # include "printf.h"
 
 void	ft_putstr(char *str, int nb);
-void	ft_puterror(char *str);
 void	*ft_memset(void *s, int c, int n);
 void	*ft_calloc(int count, int size);
 
@@ -30,4 +29,6 @@ int		int_len(int nb);
 int		uint_len(unsigned int nb);
 int		ul_len(unsigned long nb);
 int		ft_atoi(char *str);
+int		ft_power(int nb, int power);
+int		revert_hexa(char *str);
 #endif

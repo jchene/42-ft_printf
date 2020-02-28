@@ -17,7 +17,9 @@ int		apply_prec_str(int precision, t_format *formats)
 	int		i;
 	char	*buff;
 
-	printf("	applying prec on str: %s", formats->conv);
+	printf("	applying prec on str: |");
+	putprint(formats->conv, formats->true_len);
+	printf("|\n");
 	i = 0;
 	if (!(buff = (char *)malloc(sizeof(char) * (precision + 1))))
 		return (-1);
@@ -30,6 +32,7 @@ int		apply_prec_str(int precision, t_format *formats)
 	free(formats->conv);
 	formats->conv = buff;
 	formats->true_len = ((formats->true_len <= precision) ? formats->true_len : precision);
+	printf("	precision applied, true_len: %d", formats->true_len);
 	return (0);
 }
 
@@ -41,7 +44,7 @@ int		apply_prec_nbr(int precision, t_format *formats)
 	int		minus;
 	char	*buff;
 
-	//printf("applying prec on nbr: %s\n precision: %d\n", formats->conv, precision);
+	printf("applying prec on nbr: |%s|\n precision: %d\n", formats->conv, precision);
 	i = 0;
 	j = 0;
 	minus = 0;
@@ -49,6 +52,8 @@ int		apply_prec_nbr(int precision, t_format *formats)
 	////printf("formats->conv: |%s|\n", formats->conv);
 	////printf("strlen: |%d|\n", ft_strlen(formats->conv));
 	////printf("len: %d\n", len);
+	if (precision == 0 && formats->conv[0] == '0')
+		formats->conv[0] = ' ';
 	if (formats->conv[0] == '-')
 	{
 		minus++;

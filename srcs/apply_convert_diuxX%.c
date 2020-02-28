@@ -17,10 +17,10 @@ int		convert_int(int nb, t_format *formats)
 	int		i;
 	int		len;
 
-	////printf("type = d/i\n");
+	printf("	type = d/i\n");
 	len = int_len(nb);
-	////printf("converting %d\nwith len: %d\n", nb, len);
-	if (!(formats->conv = (char *)malloc(sizeof(char) * len + 1)))
+	printf("	converting %d\n	with len: %d\n", nb, len);
+	if (!(formats->conv = (char *)ft_calloc(len + 1, sizeof(char))))
 		return (-1);
 	if (nb < 0)
 	{
@@ -28,6 +28,8 @@ int		convert_int(int nb, t_format *formats)
 		formats->conv[0] = '-';
 	}
 	i = 0;
+	if (nb == 0)
+		formats->conv[i++] = '0';
 	while (nb > 0)
 	{
 		formats->conv[(len - 1 - i)] = ((nb % 10) + '0');
@@ -37,7 +39,7 @@ int		convert_int(int nb, t_format *formats)
 	formats->conv[len] = '\0';
 	formats->type = 'i';
 	formats->true_len = ft_strlen(formats->conv);
-	////printf("converted: !%s!\n", formats->conv);
+	printf("	converted: !%s!\n", formats->conv);
 	return (0);
 }
 
@@ -68,10 +70,21 @@ int		convert_hexa(unsigned long nb, t_format *formats, char *base)
 	int		len;
 	char	buff[ul_len(nb) + 1];
 
+	printf("	converting %lu\n", nb);
 	len = ul_len(nb);
 	buff[len] = '\0';
 	i = len - 1;
-	while (nb != 0 && i >= 0)
+	if (nb == 0)
+	{
+		buff[0] = '0';
+		if (!(formats->conv = (char *)ft_calloc(2, sizeof(char))))
+			return (-1);
+		ft_strcpy(formats->conv, buff);
+		formats->type = 'x';
+		formats->true_len = 1;
+		return (0);
+	}
+	while (nb > 0 && i >= 0)
 	{
 		buff[i] = base[nb % 16];
 		nb /= 16;
@@ -84,6 +97,7 @@ int		convert_hexa(unsigned long nb, t_format *formats, char *base)
 	formats->conv[len] = '\0';
 	formats->type = 'x';
 	formats->true_len = ft_strlen(formats->conv);
+	printf("	converted to |%s|\n", formats->conv);
 	return (0);
 }
 
