@@ -108,6 +108,6 @@ int		convert_percent(t_format *formats)
 	formats->conv[0] = '%';
 	formats->conv[1] = '\0';
 	formats->type = '%';
-	formats->true_len = ft_strlen(formats->conv);
+	formats->true_len = 1;
 	return (0);
 }

@@ -18,13 +18,13 @@ int		ft_printf(const char *string, ...);
 int		main(void)
 {
 	char		*string;
-	const char	*test = "-->|%-4x|<--\n";
+	const char	*test = "-->|%02.%|<--\n";
 	int			nb = -21;
 	int			*p;
 
 	string = "abc";
 	p = NULL;
-	ft_printf(test, 0);
-	printf(test, 0);
+	ft_printf(test);
+	printf(test);
 	return (0);
 }

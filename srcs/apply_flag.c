@@ -47,7 +47,7 @@ int					apply_flag_zero(t_format *formats)
 	printf("	true_len: %d\n", formats->true_len);
 	if (formats->old_len == -1)
 		formats->old_len = formats->true_len;
-	if (formats->precision > 0 && is_charset(formats->type, "diuxX") &&
+	if (formats->precision > 0 && is_charset(formats->type, "diuxX") != -1 &&
 		((formats->prec_in_param == 1) ? (formats->precision_param >= 0) : 1))
 		return (0);
 	start = formats->true_len - formats->old_len;

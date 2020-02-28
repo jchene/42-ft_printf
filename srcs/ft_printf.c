@@ -28,7 +28,7 @@ int		line_l_realloc(char *str, int n, char **line, t_format *formats)
 {
 	char			*buff;
 
-	printf("new realloc:\n	str: %s	n: %d\n	line_len: %d\n", str, n, formats->ret_len);
+	printf("new realloc:\n	str: |%s|	n: %d\n	line_len: %d\n", str, n, formats->ret_len);
 	if (!*line)
 	{
 		printf("	creating line of %d chars\n", n + 1);
@@ -83,7 +83,7 @@ int		ft_printf(const char *string, ...)
 	{
 		if ((count = count_chars(&string[i])) > 0)
 		{
-			printf("\nfound %% after %d chars, i = %d\n", count, i);
+			printf("\nfound %% after %d chars in |%s|, i = %d\n", count, &string[i], i);
 			////printf("%s\n", (char *)&string[i]);
 			if ((line_l_realloc((char *)&string[i], count, &line, formats)) == -1)
 			{
@@ -100,7 +100,7 @@ int		ft_printf(const char *string, ...)
 		}
 		else if (count == 0)
 		{
-			printf("\nfound %%, i = %d\n", i);
+			printf("\nfound %% in %s, i = %d\n", &string[i], i);
 			i++;
 			formats->jump = 0;
 			if (check_format((char *)&string[i], params, formats) == -1)
@@ -122,12 +122,14 @@ int		ft_printf(const char *string, ...)
 				free(formats->conv);
 				formats->conv = NULL;
 			}
+			printf("old i: %d\n", i);
 			i += sum_formats(formats);
-			////printf("sum formats: %d\n", sum_formats(formats));
+			printf("new i: %d\n", i);
+			printf("sum formats: %d\n", sum_formats(formats));
 		}
 		else
 		{
-			printf("\nno %% found, i = %d\n", i);
+			printf("\nno %% found in |%s|, i = %d\n", &string[i], i);
 			if ((line_l_realloc((char *)&string[i], ft_strlen((char *)&string[i]), &line, formats)) == -1)
 			{
 				if (line)

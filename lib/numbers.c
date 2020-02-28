@@ -132,13 +132,8 @@ int		sum_formats(t_format *formats)
 	ret += formats->width;
 	ret += formats->precision;
 	if (formats->type)
-	{
 		if (formats->type == '%')
-		{
-			ret+=1;
 			formats->type = '.';
-		}
-	}
 	ret++;
 	return (ret);
 }
