@@ -1,51 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_disp.c                                         :+:      :+:    :+:   */
+/*   lenghts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/13 11:25:26 by jchene            #+#    #+#             */
-/*   Updated: 2020/03/04 17:22:20 by jchene           ###   ########.fr       */
+/*   Created: 2020/03/02 18:26:32 by jchene            #+#    #+#             */
+/*   Updated: 2020/03/04 17:13:30 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/ft_printf.h"
 
-void	ft_putstr(char *string, int nb)
+int		int_len(int nb)
 {
-	int i;
+	int nb_len;
+	int	minus;
 
-	i = 0;
-	while (i < nb)
+	minus = 0;
+	if (nb == INT_MIN)
+		return (11);
+	if (nb < 0)
 	{
-		write(1, &string[i], 1);
-		i++;
+		nb *= -1;
+		minus++;
 	}
+	nb_len = 1;
+	while (nb >= 10)
+	{
+		nb /= 10;
+		nb_len++;
+	}
+	return (nb_len + minus);
 }
 
-void	*ft_memset(void *s, int c, int n)
+int		uint_len(unsigned int nb)
 {
-	unsigned char	chr;
-	int				i;
-	char			*str;
+	int nb_len;
 
-	str = s;
-	i = 0;
-	chr = (unsigned char)c;
-	while (i < n)
+	nb_len = 1;
+	while (nb > 10)
 	{
-		str[i] = chr;
-		i++;
+		nb /= 10;
+		nb_len++;
 	}
-	return (s);
+	return (nb_len);
 }
 
-void	*ft_calloc(int count, int size)
+int		ul_len(unsigned long nb)
 {
-	void	*ptr;
+	int nb_len;
 
-	if (!(ptr = malloc(size * count)))
-		return (NULL);
-	return (ft_memset(ptr, 0, count * size));
+	nb_len = 1;
+	while (nb > 10)
+	{
+		nb /= 10;
+		nb_len++;
+	}
+	return (nb_len);
 }

@@ -6,14 +6,14 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:28:27 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/18 17:41:32 by jchene           ###   ########.fr       */
+/*   Updated: 2020/03/04 17:15:19 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIB_H
 # define LIB_H
 # include "ext_libs.h"
-# include "printf.h"
+# include "ft_printf.h"
 
 void	ft_putstr(char *str, int nb);
 void	*ft_memset(void *s, int c, int n);

@@ -6,59 +6,11 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:25:26 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/18 17:54:30 by jchene           ###   ########.fr       */
+/*   Updated: 2020/03/04 17:13:59 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/printf.h"
-
-int		int_len(int nb)
-{
-	int nb_len;
-	int	minus;
-
-	//printf("testing len of %d\n", nb);
-	minus = 0;
-	if (nb < 0)
-	{
-		nb *= -1;
-		minus++;
-	}
-	nb_len = 1;
-	while (nb >= 10)
-	{
-		nb /= 10;
-		nb_len++;
-	}
-	return (nb_len + minus);
-}
-
-int		uint_len(unsigned int nb)
-{
-	int nb_len;
-
-	nb_len = 1;
-	while (nb > 10)
-	{
-		nb /= 10;
-		nb_len++;
-	}
-	return (nb_len);
-}
-
-
-int		ul_len(unsigned long nb)
-{
-	int nb_len;
-
-	nb_len = 1;
-	while (nb > 10)
-	{
-		nb /= 10;
-		nb_len++;
-	}
-	return (nb_len);
-}
+#include "../headers/ft_printf.h"
 
 int		ft_atoi(char *str)
 {
@@ -107,9 +59,7 @@ int		revert_hexa(char *string)
 	int		nbr;
 
 	nbr = 0;
-	printf("test");
 	i = (ft_strlen(string) - 1);
-	printf("test");
 	while (i >= 0)
 	{
 		if (is_charset(string[i], "ABCDEF") != -1)

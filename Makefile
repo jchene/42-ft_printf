@@ -3,16 +3,18 @@ NAME		=	libftprintf.a
 HEADER		=	headers/
 
 SRCS		=	srcs/ft_printf.c\
+				srcs/ft_printf_utils.c\
 				srcs/check.c\
 				srcs/handle.c\
 				srcs/apply_convert_csp.c\
-				srcs/apply_convert_diuxX%.c\
+				srcs/apply_convert_diux.c\
 				srcs/apply_prec.c\
 				srcs/apply_width.c\
 				srcs/apply_flag.c\
 				lib/numbers.c\
 				lib/strings.c\
 				lib/mem_disp.c\
+				lib/lenghts.c\
 
 CC			=	gcc
 

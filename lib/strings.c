@@ -6,18 +6,18 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:27:20 by jchene            #+#    #+#             */
-/*   Updated: 2020/02/18 17:35:27 by jchene           ###   ########.fr       */
+/*   Updated: 2020/03/04 17:14:14 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/printf.h"
+#include "../headers/ft_printf.h"
 
 int		is_charset(char c, char *charset)
 {
 	int i;
 
 	i = 0;
-	while(charset[i])
+	while (charset[i])
 	{
 		if (c == charset[i])
 			return (i);
@@ -36,7 +36,7 @@ int		ft_strlen(char *string)
 	return (i);
 }
 
-void  ft_strncat(char *dst, char *src, int n, int buff_len)
+void	ft_strncat(char *dst, char *src, int n, int buff_len)
 {
 	int		i;
 	int		j;
@@ -73,13 +73,4 @@ void	ft_strcpy(char *dst, char *src)
 		dst[i] = src[i];
 		i++;
 	}
-}
-
-void	putprint(char *str, int nb)
-{
-	int		i;
-
-	i = 0;
-	while (i < nb)
-		printf("%c", str[i++]);
 }
