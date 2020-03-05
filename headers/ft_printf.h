@@ -6,12 +6,12 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:57:50 by jchene            #+#    #+#             */
-/*   Updated: 2020/03/04 17:25:28 by jchene           ###   ########.fr       */
+/*   Updated: 2020/03/05 17:56:22 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include "lib.h"
 # include "ext_libs.h"
 
