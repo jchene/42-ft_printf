@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:56:23 by jchene            #+#    #+#             */
-/*   Updated: 2020/03/05 18:33:36 by jchene           ###   ########.fr       */
+/*   Updated: 2020/03/05 19:21:01 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		main_loop(const char *string, char **line, va_list *params,
 		else
 			return (string_end(&string[i], line, formats));
 	}
-	return (0);
+	return (string_end(&string[i], line, formats));
 }
 
 int		ft_printf(const char *string, ...)
