@@ -6,7 +6,7 @@
 /*   By: jchene <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:57:50 by jchene            #+#    #+#             */
-/*   Updated: 2020/03/05 17:56:22 by jchene           ###   ########.fr       */
+/*   Updated: 2020/03/09 17:10:22 by jchene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int					string_end(const char *string, char **line,
 int					main_loop(const char *string, char **line, va_list *params,
 					t_format *formats);
 int					sum_formats(t_format *formats);
-int					ft_printf(const char *string, ...);
+int					ft_printf(const char *string, ...
+					__attribute__((__format__ (__scanf__, 1, 2))));
 
 #endif
